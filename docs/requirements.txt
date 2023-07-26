@@ -1,4 +1,9 @@
 ##
+# https://myst-parser.readthedocs.io/en/latest/index.html
+#
+myst-parser==2.0.0
+
+##
 # https://github.com/sphinx-contrib/plantuml
 #
 sphinxcontrib-plantuml==0.25
