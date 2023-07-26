@@ -19,6 +19,7 @@ extensions = [
     'sphinx.ext.intersphinx',
     'myst_parser',
     'sphinxcontrib.plantuml',
+    'sphinxcontrib-openapi'
 ]
 
 intersphinx_mapping = {
