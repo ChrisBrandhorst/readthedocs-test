@@ -8,4 +8,4 @@ myst-parser==2.0.0
 #
 sphinxcontrib-plantuml==0.25
 
-sphinxcontrib-openapi=0.8.1
+sphinxcontrib-openapi==0.8.1
