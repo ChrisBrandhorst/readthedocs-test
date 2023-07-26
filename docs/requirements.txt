@@ -1,0 +1,4 @@
+##
+# https://github.com/sphinx-contrib/plantuml
+#
+sphinxcontrib-plantuml==0.25
