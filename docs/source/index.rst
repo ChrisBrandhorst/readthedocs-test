@@ -26,4 +26,4 @@ Contents
    Alice -> Bob: Hi!
    Alice <- Bob: How are you?
 
-.. openapi:: https://raw.githubusercontent.com/OAI/OpenAPI-Specification/main/examples/v2.0/json/uber.json
+.. openapi:: lspws-spec_master.json
