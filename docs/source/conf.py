@@ -39,3 +39,13 @@ html_theme = 'sphinx_rtd_theme'
 epub_show_urls = 'footnote'
 
 master_doc = 'index'
+
+
+redoc = [
+    {
+        'name': 'LSPWS API',
+        'page': 'api',
+        'spec': 'lspws-spec_master.json',
+        'embed': True,
+    }
+]
