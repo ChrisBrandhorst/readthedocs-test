@@ -7,3 +7,5 @@ myst-parser==2.0.0
 # https://github.com/sphinx-contrib/plantuml
 #
 sphinxcontrib-plantuml==0.25
+
+sphinxcontrib-openapi=0.8.1
