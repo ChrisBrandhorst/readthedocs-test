@@ -1,0 +1,5625 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "LSP webservice API documentatie",
+    "description": "Webservice om het gebruiken van het LSP te vereenvoudigen. Let op: dit is alleen de documentatie van de REST endpoints. De callbacks staan hier niet beschreven.",
+    "version": "v1"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8081/lspws",
+      "description": "Lokale development URL"
+    },
+    {
+      "url": "https://test.topicuszorg.nl/lspws/lspws",
+      "description": "Test URL"
+    },
+    {
+      "url": "https://acceptatie-lspws.topicuszorg.nl/lspws",
+      "description": "Acceptatie URL"
+    },
+    {
+      "url": "https://lspws.topicuszorg.nl/lspws",
+      "description": "Productie URL"
+    }
+  ],
+  "security": [
+    {
+      "oauth": [
+        "lspws_app"
+      ]
+    }
+  ],
+  "paths": {
+    "/v1/query/abonnementen/digid": {
+      "get": {
+        "tags": [
+          "query-abonnementen-controller"
+        ],
+        "operationId": "queryAbonnementenDigid",
+        "parameters": [
+          {
+            "name": "transactionId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "default response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/QueryResponseSubscriptionList"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/query/condities/digid": {
+      "get": {
+        "deprecated": true,
+        "description": "Please use /v1/query/condities",
+        "tags": [
+          "query-condities-controller"
+        ],
+        "operationId": "getConditiesDigiD",
+        "parameters": [
+          {
+            "name": "organizationId",
+            "deprecated": true,
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "transactionId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "default response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/QueryResponseConditionList"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/query/condities/zorgid": {
+      "get": {
+        "deprecated": true,
+        "description": "Please use /v1/query/condities",
+        "tags": [
+          "query-condities-controller"
+        ],
+        "operationId": "getConditiesZorgId",
+        "parameters": [
+          {
+            "name": "uziServerCertificateNumber",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "transactionId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "default response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/QueryResponseConditionList"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/query/condities": {
+      "get": {
+        "tags": [
+          "query-condities-controller"
+        ],
+        "operationId": "getCondities",
+        "parameters": [
+          {
+            "name": "transactionId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "default response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/QueryResponseConditionList"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/query/loggegevens/gbk": {
+      "get": {
+        "deprecated": true,
+        "description": "Please use /v1/query/loggegevens",
+        "tags": [
+          "query-loggegevens-controller"
+        ],
+        "operationId": "queryLoggegevensGbk",
+        "parameters": [
+          {
+            "name": "organizationId",
+            "deprecated": true,
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "transactionId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "default response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/QueryResponseListEventLogEntry"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/query/loggegevens/digid": {
+      "get": {
+        "deprecated": true,
+        "description": "Please use /v1/query/loggegevens",
+        "tags": [
+          "query-loggegevens-controller"
+        ],
+        "operationId": "getLoggegevensDigiD",
+        "parameters": [
+          {
+            "name": "organizationId",
+            "deprecated": true,
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "transactionId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "default response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/QueryResponseListEventLogEntry"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/query/loggegevens": {
+      "get": {
+        "tags": [
+          "query-loggegevens-controller"
+        ],
+        "operationId": "getLoggegevens",
+        "parameters": [
+          {
+            "name": "transactionId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "default response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/QueryResponseListEventLogEntry"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/query/metagegevens/gbk": {
+      "get": {
+        "deprecated": true,
+        "description": "Please use /v1/query/metagegevens",
+        "tags": [
+          "query-metagegevens-controller"
+        ],
+        "operationId": "getMetagegevensGbk",
+        "parameters": [
+          {
+            "name": "organizationId",
+            "deprecated": true,
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "transactionId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "default response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/QueryResponseListActRegistryEntry"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/query/metagegevens/digid": {
+      "get": {
+        "deprecated": true,
+        "description": "Please use /v1/query/metagegevens",
+        "tags": [
+          "query-metagegevens-controller"
+        ],
+        "operationId": "getMetagegevensDigiD",
+        "parameters": [
+          {
+            "name": "organizationId",
+            "deprecated": true,
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "transactionId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "default response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/QueryResponseListActRegistryEntry"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/query/metagegevens/zorgid": {
+      "get": {
+        "deprecated": true,
+        "description": "Please use /v1/query/metagegevens",
+        "tags": [
+          "query-metagegevens-controller"
+        ],
+        "operationId": "getMetagegevensZorgId",
+        "parameters": [
+          {
+            "name": "uziServerCertificateNumber",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "transactionId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "default response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/QueryResponseListActRegistryEntry"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/query/metagegevens": {
+      "get": {
+        "tags": [
+          "query-metagegevens-controller"
+        ],
+        "operationId": "getMetagegevens",
+        "parameters": [
+          {
+            "name": "transactionId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "default response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/QueryResponseListActRegistryEntry"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/query/ps/digid": {
+      "get": {
+        "deprecated": true,
+        "description": "Please use /v1/query/ps",
+        "tags": [
+          "query-professionele-samenvatting-controller"
+        ],
+        "operationId": "getPsDigiD",
+        "parameters": [
+          {
+            "name": "organizationId",
+            "deprecated": true,
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "transactionId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "default response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/QueryResponsePrimaryCareProvision"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/query/ps/zorgid": {
+      "get": {
+        "deprecated": true,
+        "description": "Please use /v1/query/ps",
+        "tags": [
+          "query-professionele-samenvatting-controller"
+        ],
+        "operationId": "getPsZorgId",
+        "parameters": [
+          {
+            "name": "uziServerCertificateNumber",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "transactionId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "default response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/QueryResponsePrimaryCareProvision"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/query/ps": {
+      "get": {
+        "tags": [
+          "query-professionele-samenvatting-controller"
+        ],
+        "operationId": "getPs",
+        "parameters": [
+          {
+            "name": "transactionId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "default response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/QueryResponsePrimaryCareProvision"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/query/verstrekkingen/digid": {
+      "get": {
+        "deprecated": true,
+        "description": "Please use /v1/query/verstrekkingen",
+        "tags": [
+          "query-verstrekkingen-controller"
+        ],
+        "operationId": "getVerstrekkingenDigiD",
+        "parameters": [
+          {
+            "name": "organizationId",
+            "deprecated": true,
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "transactionId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "default response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/QueryResponseMedicationDispenseList"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/query/verstrekkingen/zorgid": {
+      "get": {
+        "deprecated": true,
+        "description": "Please use /v1/query/verstrekkingen",
+        "tags": [
+          "query-verstrekkingen-controller"
+        ],
+        "operationId": "getVerstrekkingenZorgId",
+        "parameters": [
+          {
+            "name": "uziServerCertificateNumber",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "transactionId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "default response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/QueryResponseMedicationDispenseList"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/query/verstrekkingen": {
+      "get": {
+        "tags": [
+          "query-verstrekkingen-controller"
+        ],
+        "operationId": "getVerstrekkingen",
+        "parameters": [
+          {
+            "name": "transactionId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "default response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/QueryResponseMedicationDispenseList"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/register/verwijzing": {
+      "post": {
+        "tags": [
+          "registration-verwijzing-controller"
+        ],
+        "operationId": "sendVerwijzing",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ClientMessageZorgidActorClinicalDocument"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "default response"
+          }
+        }
+      }
+    },
+    "/v1/register/spoedmelding": {
+      "post": {
+        "tags": [
+          "registration-spoedmelding-controller"
+        ],
+        "operationId": "sendSpoedmelding",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ClientMessageZorgidActorClinicalDocument"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "default response"
+          }
+        }
+      }
+    },
+    "/v1/request/abonnementen/digid": {
+      "post": {
+        "tags": [
+          "request-abonnementen-controller"
+        ],
+        "operationId": "requestAbonnementenDigid",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ClientMessageDigidActorBsnQuery"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "default response"
+          }
+        }
+      }
+    },
+    "/v1/request/condities/digid": {
+      "post": {
+        "tags": [
+          "request-condities-controller"
+        ],
+        "operationId": "getConditiesDigid",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ClientMessageDigidActorBsnQuery"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "default response"
+          }
+        }
+      }
+    },
+    "/v1/request/condities/zorgid": {
+      "post": {
+        "tags": [
+          "request-condities-controller"
+        ],
+        "operationId": "getConditiesZorgid",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ClientMessageZorgidActorBsnQuery"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "default response"
+          }
+        }
+      }
+    },
+    "/v1/request/condities/system": {
+      "post": {
+        "tags": [
+          "request-condities-controller"
+        ],
+        "operationId": "getConditiesSystem",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ClientMessageSystemActorBsnQuery"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "default response"
+          }
+        }
+      }
+    },
+    "/v1/request/loggegevens/gbk": {
+      "post": {
+        "tags": [
+          "request-loggegevens-controller"
+        ],
+        "operationId": "getLoggegevensGbk",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ClientMessageGbkActorEventLogRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "default response"
+          }
+        }
+      }
+    },
+    "/v1/request/loggegevens/digid": {
+      "post": {
+        "tags": [
+          "request-loggegevens-controller"
+        ],
+        "operationId": "getLoggegevensDigid",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ClientMessageDigidActorEventLogRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "default response"
+          }
+        }
+      }
+    },
+    "/v1/request/metagegevens/zorgid": {
+      "post": {
+        "tags": [
+          "request-metagegevens-controller"
+        ],
+        "operationId": "getOpvragenMetagegevensZorgid",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ClientMessageZorgidActorActRegistryRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "default response"
+          }
+        }
+      }
+    },
+    "/v1/request/metagegevens/digid": {
+      "post": {
+        "tags": [
+          "request-metagegevens-controller"
+        ],
+        "operationId": "getOpvragenMetagegevensDigid",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ClientMessageDigidActorActRegistryRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "default response"
+          }
+        }
+      }
+    },
+    "/v1/request/metagegevens/gbk": {
+      "post": {
+        "tags": [
+          "request-metagegevens-controller"
+        ],
+        "operationId": "getOpvragenMetagegevensGbk",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ClientMessageGbkActorActRegistryRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "default response"
+          }
+        }
+      }
+    },
+    "/v1/request/ping/gbz": {
+      "post": {
+        "tags": [
+          "request-ping-controller"
+        ],
+        "operationId": "sendPingGbz",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ClientMessageSystemActorPing"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "default response"
+          }
+        }
+      }
+    },
+    "/v1/request/ping/gbp": {
+      "post": {
+        "tags": [
+          "request-ping-controller"
+        ],
+        "operationId": "sendPingGbp",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ClientMessageSystemActorPing"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "default response"
+          }
+        }
+      }
+    },
+    "/v1/request/tick/gbz": {
+      "post": {
+        "tags": [
+          "request-ping-controller"
+        ],
+        "operationId": "sendTickGbz",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ClientMessageSystemActorPing"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "default response"
+          }
+        }
+      }
+    },
+    "/v1/request/tick/gbp": {
+      "post": {
+        "tags": [
+          "request-ping-controller"
+        ],
+        "operationId": "sendTickGbp",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ClientMessageSystemActorPing"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "default response"
+          }
+        }
+      }
+    },
+    "/v1/request/ps/digid": {
+      "post": {
+        "tags": [
+          "request-professionele-samenvatting-controller"
+        ],
+        "operationId": "getProfessioneleSamenvattingDigid",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ClientMessageDigidActorBsnQuery"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "default response"
+          }
+        }
+      }
+    },
+    "/v1/request/ps/zorgid": {
+      "post": {
+        "tags": [
+          "request-professionele-samenvatting-controller"
+        ],
+        "operationId": "getProfessioneleSamenvattingZorgid",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ClientMessageZorgidActorBsnQuery"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "default response"
+          }
+        }
+      }
+    },
+    "/v1/request/verstrekkingen/digid": {
+      "post": {
+        "tags": [
+          "request-verstrekkingen-controller"
+        ],
+        "operationId": "getVerstrekkingenDigid",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ClientMessageDigidActorBsnQuery"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "default response"
+          }
+        }
+      }
+    },
+    "/v1/request/verstrekkingen/zorgid": {
+      "post": {
+        "tags": [
+          "request-verstrekkingen-controller"
+        ],
+        "operationId": "getVerstrekkingenZorgid",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ClientMessageZorgidActorBsnQuery"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "default response"
+          }
+        }
+      }
+    },
+    "/v1/request/verstrekkingen/system": {
+      "post": {
+        "tags": [
+          "request-verstrekkingen-controller"
+        ],
+        "operationId": "getVerstrekkingenSystem",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ClientMessageSystemActorBsnQuery"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "default response"
+          }
+        }
+      }
+    },
+    "/v1/register/abonnementen/digid": {
+      "post": {
+        "tags": [
+          "register-abonnementen-controller"
+        ],
+        "operationId": "registerAbonnement",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ClientMessageDigidActorRegisterSubscriptionRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "default response"
+          }
+        }
+      }
+    },
+    "/v1/deregister/abonnementen/digid": {
+      "post": {
+        "tags": [
+          "deregister-abonnementen-controller"
+        ],
+        "operationId": "deregisterAbonnement",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ClientMessageDigidActorDeregisterSubscriptionRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "default response"
+          }
+        }
+      }
+    },
+    "/v1/register/registrationtoken": {
+      "post": {
+        "summary": "registrationtoken",
+        "tags": [
+          "register-registrationtoken-controller"
+        ],
+        "responses": {
+          "200": {
+            "description": "default response"
+          }
+        },
+        "operationId": "createRegistrationToken",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ClientMessageZorgidActorRegistrationToken"
+              },
+              "examples": {}
+            }
+          },
+          "required": true
+        }
+      },
+      "parameters": []
+    },
+    "/v1/deregister/registrationtoken": {
+      "parameters": [],
+      "post": {
+        "summary": "",
+        "operationId": "deleteRegistrationToken",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "tags": [
+          "register-registrationtoken-controller"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeleteRegistrationToken"
+              },
+              "examples": {}
+            }
+          },
+          "required": true
+        }
+      }
+    },
+    "/v1/query/registrationtoken": {
+      "get": {
+        "summary": "registrationtoken",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/RegistrationToken"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "getRegistrationToken",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "identifier",
+            "required": true
+          }
+        ],
+        "tags": [
+          "query-registrationtoken-controller"
+        ]
+      }
+    },
+    "/v1/register/mandaattoken": {
+      "post": {
+        "summary": "mandaattoken",
+        "tags": [
+          "register-mandaattoken-controller"
+        ],
+        "responses": {
+          "200": {
+            "description": "default response"
+          }
+        },
+        "operationId": "createMandaatToken",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ClientMessageZorgidActorMandaatToken"
+              },
+              "examples": {}
+            }
+          },
+          "required": true
+        }
+      },
+      "parameters": []
+    },
+    "/v1/deregister/mandaattoken": {
+      "parameters": [],
+      "post": {
+        "summary": "",
+        "operationId": "deleteMandaatTokens",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "tags": [
+          "register-mandaattoken-controller"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeleteMandaatToken"
+              },
+              "examples": {}
+            }
+          },
+          "required": true
+        }
+      }
+    },
+    "/v1/query/mandaattoken": {
+      "get": {
+        "summary": "mandaattoken",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/MandaatToken"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "getMandaatTokens",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "identifier",
+            "required": true
+          }
+        ],
+        "tags": [
+          "query-mandaattoken-controller"
+        ]
+      }
+    },
+    "/v1/mitz/register/consent": {
+      "parameters": [],
+      "post": {
+        "summary": "Register consent with Mitz",
+        "operationId": "register-mitz-consent",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "description": "",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Mitz.RegisterConsentRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "tags": [
+          "mitz"
+        ]
+      }
+    },
+    "/v1/register/patienttoestemming/zorgid": {
+      "post": {
+        "summary": "",
+        "operationId": "post-v1-register-patienttoestemming-zorgid",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ClientMessageZorgidActorRegisterConsent"
+              }
+            }
+          },
+          "required": true
+        },
+        "tags": [
+          "register-patienttoestemming-controller"
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Address": {
+        "type": "object",
+        "properties": {
+          "street": {
+            "type": "string",
+            "nullable": true
+          },
+          "house_number": {
+            "type": "string",
+            "nullable": true
+          },
+          "house_number_suffix": {
+            "type": "string",
+            "nullable": true
+          },
+          "postal_code": {
+            "type": "string",
+            "nullable": true
+          },
+          "city": {
+            "type": "string",
+            "nullable": true
+          },
+          "country": {
+            "$ref": "#/components/schemas/Country"
+          }
+        },
+        "nullable": true
+      },
+      "AortaApplicationId": {
+        "required": [
+          "id"
+        ],
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OidIdentifiable"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              }
+            }
+          }
+        ]
+      },
+      "AssignedDevice": {
+        "type": "object",
+        "properties": {
+          "aorta_application_id": {
+            "$ref": "#/components/schemas/AortaApplicationId"
+          },
+          "uzi_server_certificate_number": {
+            "$ref": "#/components/schemas/UziServerCertificateNumber"
+          },
+          "organization": {
+            "$ref": "#/components/schemas/Organization"
+          }
+        }
+      },
+      "AssignedEntity": {
+        "required": [
+          "type"
+        ],
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string"
+          }
+        },
+        "nullable": true,
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "Organization": "#/components/schemas/Organization",
+            "AssignedPerson": "#/components/schemas/AssignedPerson"
+          }
+        }
+      },
+      "AssignedPerson": {
+        "required": [
+          "identification"
+        ],
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/AssignedEntity"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "name": {
+                "$ref": "#/components/schemas/PersonName"
+              },
+              "identification": {
+                "$ref": "#/components/schemas/Identification"
+              },
+              "role_code": {
+                "$ref": "#/components/schemas/CodeWithName"
+              },
+              "organization": {
+                "$ref": "#/components/schemas/Organization"
+              }
+            }
+          }
+        ]
+      },
+      "BurgerIdentification": {
+        "required": [
+          "bsn"
+        ],
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Identification"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "bsn": {
+                "type": "string"
+              }
+            }
+          }
+        ]
+      },
+      "CodeWithName": {
+        "required": [
+          "code",
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          }
+        },
+        "description": ""
+      },
+      "CodeWithNameAndVersion": {
+        "required": [
+          "code",
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "version": {
+            "type": "string"
+          }
+        }
+      },
+      "ConditionList": {
+        "required": [
+          "contraindications",
+          "observation_intolerances"
+        ],
+        "type": "object",
+        "properties": {
+          "patient": {
+            "$ref": "#/components/schemas/Patient"
+          },
+          "contraindications": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ContraIndication"
+            }
+          },
+          "observation_intolerances": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ObservationIntolerance"
+            }
+          }
+        },
+        "nullable": true
+      },
+      "ContraIndication": {
+        "required": [
+          "code",
+          "id",
+          "value"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "code": {
+            "$ref": "#/components/schemas/CodeWithName"
+          },
+          "text": {
+            "type": "string",
+            "nullable": true
+          },
+          "begin_time": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true,
+            "description": "Geldigheidstermijn"
+          },
+          "end_time": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true,
+            "description": "Geldigheidstermijn"
+          },
+          "value": {
+            "$ref": "#/components/schemas/ContraIndicationValue"
+          },
+          "determination_moment": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true,
+            "description": "Vaststellingsmoment"
+          },
+          "author": {
+            "$ref": "#/components/schemas/AssignedPerson"
+          },
+          "data_source": {
+            "$ref": "#/components/schemas/AssignedPerson"
+          }
+        }
+      },
+      "ContraIndicationValue": {
+        "required": [
+          "type"
+        ],
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string"
+          }
+        },
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "Th040Value": "#/components/schemas/Th040Value",
+            "IcpcValue": "#/components/schemas/IcpcValue",
+            "ContraIndicationOtherValue": "#/components/schemas/ContraIndicationOtherValue"
+          }
+        }
+      },
+      "Th040Value": {
+        "required": [
+          "th040"
+        ],
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ContraIndicationValue"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "th040": {
+                "$ref": "#/components/schemas/CodeWithName"
+              }
+            }
+          }
+        ]
+      },
+      "IcpcValue": {
+        "required": [
+          "icpc"
+        ],
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ContraIndicationValue"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "icpc": {
+                "$ref": "#/components/schemas/CodeWithName"
+              }
+            }
+          }
+        ]
+      },
+      "Country": {
+        "required": [
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "iso": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "nullable": true
+      },
+      "GbpOrganizationId": {
+        "required": [
+          "value"
+        ],
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OrganizationId"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "string"
+              }
+            }
+          }
+        ]
+      },
+      "Identification": {
+        "required": [
+          "type"
+        ],
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string"
+          }
+        },
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "ZorgverlenerIdentification": "#/components/schemas/ZorgverlenerIdentification",
+            "BurgerIdentification": "#/components/schemas/BurgerIdentification"
+          }
+        }
+      },
+      "ObservationIntolerance": {
+        "required": [
+          "code",
+          "id",
+          "negation_ind",
+          "value"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "code": {
+            "$ref": "#/components/schemas/CodeWithName"
+          },
+          "negation_ind": {
+            "type": "boolean"
+          },
+          "text": {
+            "type": "string",
+            "nullable": true
+          },
+          "begin_time": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true,
+            "description": "Geldigheidstermijn"
+          },
+          "end_time": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true,
+            "description": "Geldigheidstermijn"
+          },
+          "value": {
+            "$ref": "#/components/schemas/ObservationIntoleranceValue"
+          },
+          "determination_moment": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true,
+            "description": "Vaststellingsmoment"
+          },
+          "author": {
+            "$ref": "#/components/schemas/AssignedPerson"
+          },
+          "data_source": {
+            "$ref": "#/components/schemas/AssignedPerson"
+          }
+        },
+        "description": "code: code van conditietype uit de ActCode lijst. Gebruikte codes: DX, DINT, DALG, DNAINT, INTLRNC"
+      },
+      "Organization": {
+        "required": [
+          "identification"
+        ],
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/AssignedEntity"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "identification": {
+                "$ref": "#/components/schemas/OrganizationId"
+              },
+              "name": {
+                "type": "string",
+                "nullable": true
+              },
+              "address": {
+                "$ref": "#/components/schemas/Address"
+              },
+              "phone_number": {
+                "type": "string",
+                "nullable": true
+              }
+            }
+          }
+        ]
+      },
+      "OrganizationId": {
+        "required": [
+          "type"
+        ],
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string"
+          }
+        },
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "UraOrganizationId": "#/components/schemas/UraOrganizationId",
+            "GbpOrganizationId": "#/components/schemas/GbpOrganizationId"
+          }
+        }
+      },
+      "ObservationIntoleranceOtherValue": {
+        "required": [
+          "text"
+        ],
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ObservationIntoleranceValue"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "text": {
+                "type": "string"
+              }
+            }
+          }
+        ]
+      },
+      "ContraIndicationOtherValue": {
+        "required": [
+          "text"
+        ],
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ContraIndicationValue"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "text": {
+                "type": "string"
+              }
+            }
+          }
+        ]
+      },
+      "Patient": {
+        "required": [
+          "gender",
+          "phone_numbers"
+        ],
+        "type": "object",
+        "properties": {
+          "bsn": {
+            "type": "string",
+            "nullable": true
+          },
+          "address": {
+            "$ref": "#/components/schemas/Address"
+          },
+          "phone_numbers": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "name": {
+            "$ref": "#/components/schemas/StructuredPersonName"
+          },
+          "unstructured_name": {
+            "$ref": "#/components/schemas/UnstructuredPersonName"
+          },
+          "gender": {
+            "$ref": "#/components/schemas/Gender"
+          },
+          "birth_date": {
+            "type": "string",
+            "format": "date",
+            "nullable": true
+          }
+        },
+        "nullable": true,
+        "description": "bsn: Verplicht bij WRB"
+      },
+      "Gender": {
+        "type": "string",
+        "enum": [
+          "F",
+          "M",
+          "UN"
+        ]
+      },
+      "PersonName": {
+        "required": [
+          "type"
+        ],
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string"
+          }
+        },
+        "nullable": true,
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "StructuredPersonName": "#/components/schemas/StructuredPersonName",
+            "UnstructuredPersonName": "#/components/schemas/UnstructuredPersonName"
+          }
+        }
+      },
+      "QueryResponseConditionList": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/QueryResponse"
+          },
+          {
+            "$ref": "#/components/schemas/QueryResponseAssignedDevice"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "data": {
+                "$ref": "#/components/schemas/ConditionList"
+              }
+            }
+          }
+        ]
+      },
+      "StatusDetail": {
+        "required": [
+          "context",
+          "status",
+          "status_detail_type"
+        ],
+        "type": "object",
+        "properties": {
+          "status": {
+            "$ref": "#/components/schemas/StatusDetailStatus"
+          },
+          "status_detail_type": {
+            "$ref": "#/components/schemas/StatusDetailType"
+          },
+          "context": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "code": {
+            "type": "string",
+            "description": "AORTA Foutcode",
+            "nullable": true
+          }
+        }
+      },
+      "StatusDetailType": {
+        "type": "string",
+        "enum": [
+          "GENERIC",
+          "PARSE_DEVICE",
+          "PARSE_PATIENT",
+          "PARSE_DATA",
+          "LSP"
+        ]
+      },
+      "StatusDetailStatus": {
+        "type": "string",
+        "enum": [
+          "SUCCESS",
+          "WARNING",
+          "ERROR"
+        ]
+      },
+      "StructuredPersonName": {
+        "required": [
+          "family"
+        ],
+        "type": "object",
+        "description": "Gestructureerde naam met specifieke naam-onderdelen",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/PersonName"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "initials": {
+                "type": "string",
+                "nullable": true
+              },
+              "given": {
+                "type": "string",
+                "nullable": true
+              },
+              "prefix_family": {
+                "type": "string",
+                "nullable": true
+              },
+              "family": {
+                "type": "string"
+              },
+              "prefix_spouse": {
+                "type": "string",
+                "nullable": true
+              },
+              "spouse": {
+                "type": "string",
+                "nullable": true
+              }
+            }
+          }
+        ]
+      },
+      "SubstanceWithRouteOfAdministrationValue": {
+        "required": [
+          "ssk"
+        ],
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ObservationIntoleranceValue"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "ssk": {
+                "$ref": "#/components/schemas/CodeWithName"
+              }
+            }
+          }
+        ]
+      },
+      "SubstancenameValue": {
+        "required": [
+          "snk"
+        ],
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ObservationIntoleranceValue"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "snk": {
+                "$ref": "#/components/schemas/CodeWithName"
+              }
+            }
+          }
+        ]
+      },
+      "UnstructuredPersonName": {
+        "required": [
+          "name"
+        ],
+        "type": "object",
+        "description": "Ongestructureerde naam, bijvoorbeeld te gebruiken wanneer er een alias gevoerd moet worden",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/PersonName"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              }
+            }
+          }
+        ]
+      },
+      "UnwantedGroupValue": {
+        "required": [
+          "unwanted_group"
+        ],
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ObservationIntoleranceValue"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "unwanted_group": {
+                "$ref": "#/components/schemas/CodeWithName"
+              }
+            }
+          }
+        ]
+      },
+      "UnwantedHandelsproductValue": {
+        "required": [
+          "hpk"
+        ],
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ObservationIntoleranceValue"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "hpk": {
+                "$ref": "#/components/schemas/CodeWithName"
+              }
+            }
+          }
+        ]
+      },
+      "UraOrganizationId": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OrganizationId"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "ura": {
+                "type": "string",
+                "nullable": true
+              },
+              "agb": {
+                "type": "string",
+                "nullable": true
+              }
+            }
+          }
+        ]
+      },
+      "UziServerCertificateNumber": {
+        "required": [
+          "id"
+        ],
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OidIdentifiable"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              }
+            }
+          }
+        ]
+      },
+      "AortaOrganizationId": {
+        "required": [
+          "id"
+        ],
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OidIdentifiable"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              }
+            }
+          }
+        ]
+      },
+      "Ura": {
+        "required": [
+          "id"
+        ],
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OidIdentifiable"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              }
+            }
+          }
+        ]
+      },
+      "OidIdentifiable": {
+        "required": [
+          "type"
+        ],
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string"
+          }
+        },
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "AortaApplicationId": "#/components/schemas/AortaApplicationId",
+            "AortaOrganizationId": "#/components/schemas/AortaOrganizationId",
+            "Ura": "#/components/schemas/Ura",
+            "UziServerCertificateNumber": "#/components/schemas/UziServerCertificateNumber"
+          }
+        }
+      },
+      "ObservationIntoleranceValue": {
+        "required": [
+          "type"
+        ],
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string"
+          }
+        },
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "SubstancenameValue": "#/components/schemas/SubstancenameValue",
+            "SubstanceWithRouteOfAdministrationValue": "#/components/schemas/SubstanceWithRouteOfAdministrationValue",
+            "UnwantedGroupValue": "#/components/schemas/UnwantedGroupValue",
+            "UnwantedHandelsproductValue": "#/components/schemas/UnwantedHandelsproductValue",
+            "ObservationIntoleranceOtherValue": "#/components/schemas/ObservationIntoleranceOtherValue"
+          }
+        }
+      },
+      "ZorgverlenerIdentification": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Identification"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "agb_code": {
+                "type": "string",
+                "nullable": true
+              },
+              "uzi_number": {
+                "type": "string",
+                "nullable": true
+              }
+            }
+          }
+        ]
+      },
+      "EventLogEntry": {
+        "required": [
+          "application_id",
+          "assigned_entity",
+          "interaction_id",
+          "responses",
+          "time"
+        ],
+        "type": "object",
+        "properties": {
+          "interaction_id": {
+            "type": "string"
+          },
+          "interaction_context_code": {
+            "type": "string",
+            "nullable": true
+          },
+          "time": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "assigned_entity": {
+            "$ref": "#/components/schemas/AssignedEntity"
+          },
+          "application_id": {
+            "$ref": "#/components/schemas/AortaApplicationId"
+          },
+          "responses": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EventLogEntryResponse"
+            }
+          }
+        },
+        "nullable": true
+      },
+      "EventLogEntryResponse": {
+        "required": [
+          "assigned_device",
+          "errorcodes",
+          "is_successful"
+        ],
+        "type": "object",
+        "properties": {
+          "organization": {
+            "$ref": "#/components/schemas/Organization"
+          },
+          "assigned_device": {
+            "$ref": "#/components/schemas/AssignedDevice"
+          },
+          "is_successful": {
+            "type": "boolean"
+          },
+          "errorcodes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "QueryResponseListEventLogEntry": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/QueryResponse"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "data": {
+                "type": "array",
+                "nullable": true,
+                "items": {
+                  "$ref": "#/components/schemas/EventLogEntry"
+                }
+              }
+            }
+          }
+        ]
+      },
+      "ActRegistryEntry": {
+        "required": [
+          "act_registry_code",
+          "assigned_device",
+          "bsn",
+          "organization",
+          "status_code",
+          "time"
+        ],
+        "type": "object",
+        "properties": {
+          "act_registry_code": {
+            "type": "string",
+            "description": "Code van gegevenssoort uit ActRegistryCodeNL tabel"
+          },
+          "status_code": {
+            "$ref": "#/components/schemas/ActStatus"
+          },
+          "time": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "organization": {
+            "$ref": "#/components/schemas/Organization"
+          },
+          "bsn": {
+            "type": "string"
+          },
+          "assigned_device": {
+            "$ref": "#/components/schemas/AssignedDevice"
+          }
+        },
+        "nullable": true
+      },
+      "ActStatus": {
+        "type": "string",
+        "enum": [
+          "NORMAL",
+          "ABORTED",
+          "ACTIVE",
+          "CANCELLED",
+          "COMPLETED",
+          "HELD",
+          "NEW",
+          "SUSPENDED",
+          "NULLIFIED",
+          "OBSOLETE"
+        ]
+      },
+      "QueryResponseListActRegistryEntry": {
+        "required": [
+          "status",
+          "status_details"
+        ],
+        "type": "object",
+        "properties": {
+          "status": {
+            "$ref": "#/components/schemas/StatusDetailStatus"
+          },
+          "status_details": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/StatusDetail"
+            }
+          },
+          "data": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/ActRegistryEntry"
+            }
+          }
+        }
+      },
+      "Activity": {
+        "required": [
+          "type"
+        ],
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string"
+          }
+        },
+        "nullable": true,
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "JournalEntry": "#/components/schemas/JournalEntry",
+            "CareStatement": "#/components/schemas/CareStatement",
+            "MedicationCombinedOrder": "#/components/schemas/MedicationCombinedOrder"
+          }
+        }
+      },
+      "AttentionObservation": {
+        "required": [
+          "id"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          }
+        },
+        "nullable": true
+      },
+      "CareStatement": {
+        "required": [
+          "diagnostic_finding",
+          "id"
+        ],
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Activity"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "sequenceNumber": {
+                "type": "integer",
+                "format": "int64"
+              },
+              "author": {
+                "$ref": "#/components/schemas/AssignedPerson"
+              },
+              "time": {
+                "type": "string",
+                "format": "date-time",
+                "nullable": true
+              },
+              "diagnostic_finding": {
+                "$ref": "#/components/schemas/CodeWithNameAndVersion"
+              },
+              "diagnostic_type": {
+                "$ref": "#/components/schemas/CareStatementType"
+              },
+              "value": {
+                "$ref": "#/components/schemas/CareStatementValue"
+              },
+              "text": {
+                "type": "string"
+              },
+              "interpretation_code": {
+                "$ref": "#/components/schemas/CodeWithName"
+              },
+              "reference_range": {
+                "$ref": "#/components/schemas/CareStatementIntervalValue"
+              }
+            }
+          }
+        ],
+        "description": "sequenceNumber: Verplicht bij WRB"
+      },
+      "CareStatementBooleanValue": {
+        "required": [
+          "value"
+        ],
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/CareStatementValue"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "boolean"
+              }
+            }
+          }
+        ]
+      },
+      "CareStatementCodedValue": {
+        "required": [
+          "value"
+        ],
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/CareStatementValue"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "value": {
+                "$ref": "#/components/schemas/CodeWithName"
+              }
+            }
+          }
+        ]
+      },
+      "CareStatementDateValue": {
+        "required": [
+          "value"
+        ],
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/CareStatementValue"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "string",
+                "format": "date"
+              }
+            }
+          }
+        ]
+      },
+      "CareStatementIntervalValue": {
+        "required": [
+          "ucum"
+        ],
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/CareStatementValue"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "ucum": {
+                "$ref": "#/components/schemas/OpenRangeUcum"
+              }
+            }
+          }
+        ]
+      },
+      "CareStatementQuantityValue": {
+        "required": [
+          "ucum"
+        ],
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/CareStatementValue"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "ucum": {
+                "$ref": "#/components/schemas/QuantityUcum"
+              }
+            }
+          }
+        ]
+      },
+      "CareStatementStringValue": {
+        "required": [
+          "value"
+        ],
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/CareStatementValue"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "string"
+              }
+            }
+          }
+        ]
+      },
+      "CareStatementValue": {
+        "required": [
+          "type"
+        ],
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string"
+          }
+        },
+        "nullable": true,
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "CareStatementBooleanValue": "#/components/schemas/CareStatementBooleanValue",
+            "CareStatementCodedValue": "#/components/schemas/CareStatementCodedValue",
+            "CareStatementIntervalValue": "#/components/schemas/CareStatementIntervalValue",
+            "CareStatementQuantityValue": "#/components/schemas/CareStatementQuantityValue",
+            "CareStatementStringValue": "#/components/schemas/CareStatementStringValue",
+            "CareStatementDateValue": "#/components/schemas/CareStatementDateValue"
+          }
+        }
+      },
+      "CareStatementType": {
+        "type": "string",
+        "description": "Soort bepaling, volgens NHG tabel 45. Het verschil tussen 'Diagnostische bepaling, algemeen' en 'Protocol specifieke diagnostische bepaling' is niet relevant.\nVoor backwards compatibiliteit: nullable, null wordt geïnterpreteerd als DIAGNOSTIC_OBSERVATION.",
+        "nullable": true,
+        "enum": [
+          "DIAGNOSTIC_OBSERVATION",
+          "LABORATORY_OBSERVATION"
+        ]
+      },
+      "CareTransferData": {
+        "required": [
+          "text"
+        ],
+        "type": "object",
+        "properties": {
+          "text": {
+            "type": "string"
+          },
+          "begin_time": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "end_time": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "author": {
+            "$ref": "#/components/schemas/AssignedPerson"
+          }
+        }
+      },
+      "DoseFrequency": {
+        "required": [
+          "type"
+        ],
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string"
+          }
+        },
+        "nullable": true,
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "FixedDoseFrequency": "#/components/schemas/FixedDoseFrequency",
+            "RangeDoseFrequency": "#/components/schemas/RangeDoseFrequency"
+          }
+        }
+      },
+      "DoseFrequencyPeriod": {
+        "required": [
+          "period",
+          "unit"
+        ],
+        "type": "object",
+        "properties": {
+          "period": {
+            "type": "number",
+            "format": "double"
+          },
+          "unit": {
+            "$ref": "#/components/schemas/TimeUnit"
+          }
+        },
+        "description": "De tijdsperiode die gebruikt wordt in een frequentie-indicatie voor een voorschrift, bijv. 'per 12 uur'",
+        "nullable": true
+      },
+      "TimeUnit": {
+        "type": "string",
+        "enum": [
+          "H",
+          "D",
+          "WK",
+          "MO",
+          "A"
+        ]
+      },
+      "DoseQuantity": {
+        "required": [
+          "type"
+        ],
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string"
+          }
+        },
+        "nullable": true,
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "FixedDoseQuantity": "#/components/schemas/FixedDoseQuantity",
+            "RangeDoseQuantity": "#/components/schemas/RangeDoseQuantity"
+          }
+        }
+      },
+      "Encounter": {
+        "required": [
+          "begin_time",
+          "id",
+          "partial_encounters",
+          "type_code"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "author": {
+            "$ref": "#/components/schemas/AssignedPerson"
+          },
+          "begin_time": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "end_time": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "type_code": {
+            "$ref": "#/components/schemas/CodeWithName"
+          },
+          "partial_encounters": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PartialEncounter"
+            }
+          }
+        }
+      },
+      "EpisodeOfCondition": {
+        "required": [
+          "id"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "author": {
+            "$ref": "#/components/schemas/AssignedPerson"
+          },
+          "authors": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/AssignedPerson"
+            }
+          },
+          "begin_time": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "end_time": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "icpc": {
+            "$ref": "#/components/schemas/CodeWithName"
+          },
+          "diagnosis_begin_time": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "diagnosis_end_time": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "begin_time_episode_of_care": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "end_time_episode_of_care": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "attentions": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/AttentionObservation"
+            }
+          }
+        }
+      },
+      "FixedDoseFrequency": {
+        "required": [
+          "value"
+        ],
+        "type": "object",
+        "description": "Een vaste frequentie-indicatie voor een voorschrift, bijv. '2 maal per 12 uur'",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/DoseFrequency"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "integer",
+                "format": "int32"
+              },
+              "period": {
+                "$ref": "#/components/schemas/DoseFrequencyPeriod"
+              }
+            }
+          }
+        ]
+      },
+      "FixedDoseQuantity": {
+        "required": [
+          "ucum"
+        ],
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/DoseQuantity"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "ucum": {
+                "$ref": "#/components/schemas/QuantityUcum"
+              },
+              "gstandard": {
+                "$ref": "#/components/schemas/QuantityWithCodedUnit"
+              },
+              "nhg": {
+                "$ref": "#/components/schemas/QuantityWithCodedUnit"
+              }
+            }
+          }
+        ],
+        "description": "gstandard: Verplicht bij AZ-verwijzing"
+      },
+      "GpkMedicationKind": {
+        "required": [
+          "gpk"
+        ],
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/MedicationKind"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "gpk": {
+                "$ref": "#/components/schemas/CodeWithName"
+              }
+            }
+          }
+        ]
+      },
+      "HpkMedicationKind": {
+        "required": [
+          "hpk"
+        ],
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/MedicationKind"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "hpk": {
+                "$ref": "#/components/schemas/CodeWithName"
+              },
+              "prk": {
+                "$ref": "#/components/schemas/CodeWithName"
+              },
+              "gpk": {
+                "$ref": "#/components/schemas/CodeWithName"
+              }
+            }
+          }
+        ]
+      },
+      "JournalEntry": {
+        "required": [
+          "code",
+          "id",
+          "value"
+        ],
+        "description": "sequenceNumber: Verplicht bij WRB",
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Activity"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "sequenceNumber": {
+                "type": "integer",
+                "format": "int64"
+              },
+              "author": {
+                "$ref": "#/components/schemas/AssignedPerson"
+              },
+              "time": {
+                "type": "string",
+                "format": "date-time",
+                "nullable": true
+              },
+              "code": {
+                "$ref": "#/components/schemas/JournalEntryCode"
+              },
+              "value": {
+                "type": "string"
+              },
+              "icpc": {
+                "$ref": "#/components/schemas/CodeWithName"
+              },
+              "diagnosis_begin_time": {
+                "type": "string",
+                "format": "date-time",
+                "nullable": true
+              },
+              "diagnosis_end_time": {
+                "type": "string",
+                "format": "date-time",
+                "nullable": true
+              }
+            }
+          }
+        ]
+      },
+      "JournalEntryCode": {
+        "type": "string",
+        "enum": [
+          "S",
+          "O",
+          "E",
+          "P"
+        ]
+      },
+      "KnmpMedicationKind": {
+        "required": [
+          "knmp"
+        ],
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/MedicationKind"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "knmp": {
+                "$ref": "#/components/schemas/CodeWithName"
+              },
+              "hpk": {
+                "$ref": "#/components/schemas/CodeWithName"
+              },
+              "prk": {
+                "$ref": "#/components/schemas/CodeWithName"
+              },
+              "gpk": {
+                "$ref": "#/components/schemas/CodeWithName"
+              }
+            }
+          }
+        ]
+      },
+      "MagistraalMedicationKind": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/MedicationKind"
+          },
+          {
+            "type": "object",
+            "required": [
+              "active_ingredients",
+              "other_ingredients",
+              "description"
+            ],
+            "properties": {
+              "title": {
+                "type": "string",
+                "nullable": true
+              },
+              "description": {
+                "type": "string"
+              },
+              "active_ingredients": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/MagistraalMedicationActiveIngredient"
+                }
+              },
+              "other_ingredients": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/MagistraalMedicationOtherIngredient"
+                }
+              }
+            }
+          }
+        ]
+      },
+      "MagistraalMedicationActiveIngredient": {
+        "type": "object",
+        "properties": {
+          "quantity": {
+            "$ref": "#/components/schemas/MedicationQuantity"
+          },
+          "ingredient_material_kind": {
+            "$ref": "#/components/schemas/MedicationKind"
+          }
+        }
+      },
+      "MagistraalMedicationOtherIngredient": {
+        "type": "object",
+        "required": [
+          "ingredient_material_kind"
+        ],
+        "properties": {
+          "quantity": {
+            "$ref": "#/components/schemas/MedicationQuantity"
+          },
+          "ingredient_material_kind": {
+            "$ref": "#/components/schemas/MedicationKind"
+          }
+        }
+      },
+      "MedicationQuantity": {
+        "type": "object",
+        "required": [
+          "numerator",
+          "denominator"
+        ],
+        "properties": {
+          "numerator": {
+            "$ref": "#/components/schemas/MedicationNumeratorQuantityType"
+          },
+          "denominator": {
+            "$ref": "#/components/schemas/QuantityUcum"
+          }
+        }
+      },
+      "MedicationNumeratorQuantityType": {
+        "required": [
+          "type"
+        ],
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string"
+          }
+        },
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "SufficientQuantity": "#/components/schemas/SufficientQuantity",
+            "MedicationUcumQuantity": "#/components/schemas/MedicationUcumQuantity"
+          }
+        }
+      },
+      "SufficientQuantity": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/MedicationNumeratorQuantityType"
+          }
+        ]
+      },
+      "MedicationUcumQuantity": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/MedicationNumeratorQuantityType"
+          },
+          {
+            "type": "object",
+            "required": [
+              "ucum_quantity"
+            ],
+            "properties": {
+              "ucum_quantity": {
+                "$ref": "#/components/schemas/QuantityUcum"
+              }
+            }
+          }
+        ]
+      },
+      "MedicationAdministrationInstruction": {
+        "required": [
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "description": "NHG tabel 25 code",
+            "nullable": true
+          },
+          "name": {
+            "type": "string",
+            "description": "Omschrijving"
+          }
+        },
+        "description": "AanvullendeGebruiksinstructie / RandvoorwaardeVoorGebruik"
+      },
+      "MedicationAdministrationRequest": {
+        "required": [
+          "instructions"
+        ],
+        "type": "object",
+        "properties": {
+          "text": {
+            "type": "string",
+            "nullable": true
+          },
+          "begin_time": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "end_time": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "frequency": {
+            "$ref": "#/components/schemas/DoseFrequency"
+          },
+          "quantity": {
+            "$ref": "#/components/schemas/DoseQuantity"
+          },
+          "route_of_administration": {
+            "$ref": "#/components/schemas/CodeWithName"
+          },
+          "instructions": {
+            "type": "array",
+            "description": "Aanvullende gebruiksvoorschrift-teksten",
+            "items": {
+              "$ref": "#/components/schemas/MedicationAdministrationInstruction"
+            }
+          }
+        },
+        "description": "Gebruiksvoorschrift van medicatie"
+      },
+      "MedicationCombinedOrder": {
+        "required": [
+          "administration_requests",
+          "id",
+          "medication_kind"
+        ],
+        "type": "object",
+        "description": "Medicatievoorschrift\n\nsequenceNumber: Verplicht bij WRB",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Activity"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "sequenceNumber": {
+                "type": "integer",
+                "format": "int64"
+              },
+              "author": {
+                "$ref": "#/components/schemas/AssignedPerson"
+              },
+              "time": {
+                "type": "string",
+                "description": "Voorschrijftijd",
+                "format": "date-time",
+                "nullable": true
+              },
+              "medication_kind": {
+                "$ref": "#/components/schemas/MedicationKind"
+              },
+              "ucum_quantity": {
+                "$ref": "#/components/schemas/QuantityUcum"
+              },
+              "gstandard_quantity": {
+                "$ref": "#/components/schemas/QuantityWithCodedUnit"
+              },
+              "stopped": {
+                "type": "boolean",
+                "nullable": true
+              },
+              "administration_requests": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/MedicationAdministrationRequest"
+                }
+              }
+            }
+          }
+        ]
+      },
+      "MedicationKind": {
+        "required": [
+          "type"
+        ],
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string"
+          }
+        },
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "GpkMedicationKind": "#/components/schemas/GpkMedicationKind",
+            "PrkMedicationKind": "#/components/schemas/PrkMedicationKind",
+            "HpkMedicationKind": "#/components/schemas/HpkMedicationKind",
+            "KnmpMedicationKind": "#/components/schemas/KnmpMedicationKind",
+            "MagistraalMedicationKind": "#/components/schemas/MagistraalMedicationKind"
+          }
+        }
+      },
+      "OpenRangeUcum": {
+        "required": [
+          "unit"
+        ],
+        "type": "object",
+        "properties": {
+          "low": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "high": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "unit": {
+            "type": "string"
+          }
+        }
+      },
+      "PartialEncounter": {
+        "required": [
+          "activities"
+        ],
+        "type": "object",
+        "properties": {
+          "activities": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Activity"
+            }
+          },
+          "linked_episode_id": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "PrimaryCareProvision": {
+        "required": [
+          "care_transfer_data",
+          "encounters",
+          "episodes",
+          "id"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "text": {
+            "type": "string",
+            "nullable": true
+          },
+          "status_code": {
+            "$ref": "#/components/schemas/StatusCode"
+          },
+          "begin_time": {
+            "type": "string",
+            "description": "Optioneel indien statusCode = ACTIVE",
+            "format": "date-time",
+            "nullable": true
+          },
+          "end_time": {
+            "type": "string",
+            "description": "Optioneel indien statusCode = ACTIVE",
+            "format": "date-time",
+            "nullable": true
+          },
+          "patient": {
+            "$ref": "#/components/schemas/Patient"
+          },
+          "author": {
+            "$ref": "#/components/schemas/AssignedPerson"
+          },
+          "performer": {
+            "type": "array",
+            "description": "Alleen gebruikt bij PS, niet bij WRB",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/AssignedPerson"
+            }
+          },
+          "custodian": {
+            "$ref": "#/components/schemas/AssignedPerson"
+          },
+          "episodes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EpisodeOfCondition"
+            }
+          },
+          "care_transfer_data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CareTransferData"
+            }
+          },
+          "encounters": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Encounter"
+            }
+          },
+          "activities": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/Activity"
+            }
+          },
+          "contra_indications": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/ContraIndication"
+            }
+          },
+          "observation_intolerances": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/ObservationIntolerance"
+            }
+          }
+        },
+        "nullable": true,
+        "description": "patient: Verplicht bij AZ-verwijzing\nauthor: Niet gebruikt bij WRB\nperformer: Niet gebruikt bij WRB, bij PS alleen indien author gevuld is\ncustodian: Niet gebruikt bij WRB\nactivities: Niet gebruikt bij WRB\ncontraIndications: Niet gebruikt bij WRB\nobservationIntolerances: Niet gebruikt bij WRB"
+      },
+      "StatusCode": {
+        "type": "string",
+        "nullable": true,
+        "enum": [
+          "ACTIVE",
+          "COMPLETED"
+        ]
+      },
+      "PrkMedicationKind": {
+        "required": [
+          "prk"
+        ],
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/MedicationKind"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "prk": {
+                "$ref": "#/components/schemas/CodeWithName"
+              },
+              "gpk": {
+                "$ref": "#/components/schemas/CodeWithName"
+              }
+            }
+          }
+        ]
+      },
+      "QuantityUcum": {
+        "required": [
+          "quantity",
+          "unit"
+        ],
+        "type": "object",
+        "properties": {
+          "quantity": {
+            "type": "number",
+            "format": "double"
+          },
+          "unit": {
+            "type": "string"
+          }
+        },
+        "nullable": true
+      },
+      "QuantityWithCodedUnit": {
+        "required": [
+          "quantity",
+          "unit"
+        ],
+        "type": "object",
+        "properties": {
+          "quantity": {
+            "type": "number",
+            "format": "double"
+          },
+          "unit": {
+            "$ref": "#/components/schemas/CodeWithName"
+          }
+        },
+        "description": "Dit veld is verplicht bij de verwijzing naar de SEH",
+        "nullable": true
+      },
+      "QueryResponsePrimaryCareProvision": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/QueryResponse"
+          },
+          {
+            "$ref": "#/components/schemas/QueryResponseAssignedDevice"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "data": {
+                "$ref": "#/components/schemas/PrimaryCareProvision"
+              }
+            }
+          }
+        ]
+      },
+      "QueryResponse": {
+        "required": [
+          "status",
+          "status_details"
+        ],
+        "type": "object",
+        "properties": {
+          "status": {
+            "$ref": "#/components/schemas/StatusDetailStatus"
+          },
+          "status_details": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/StatusDetail"
+            }
+          }
+        }
+      },
+      "RangeDoseFrequency": {
+        "required": [
+          "high",
+          "low"
+        ],
+        "type": "object",
+        "description": "Een variabele frequentie-indicatie voor een voorschrift, bijv. '1-2 maal per 12 uur'\n\ngstandard: Verplicht bij AZ-verwijzing",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/DoseFrequency"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "low": {
+                "type": "integer",
+                "format": "int32"
+              },
+              "high": {
+                "type": "integer",
+                "format": "int32"
+              },
+              "period": {
+                "$ref": "#/components/schemas/DoseFrequencyPeriod"
+              }
+            }
+          }
+        ]
+      },
+      "RangeDoseQuantity": {
+        "required": [
+          "ucum"
+        ],
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/DoseQuantity"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "ucum": {
+                "$ref": "#/components/schemas/RangeUcum"
+              },
+              "gstandard": {
+                "$ref": "#/components/schemas/RangeWithCodedUnit"
+              },
+              "nhg": {
+                "$ref": "#/components/schemas/RangeWithCodedUnit"
+              }
+            }
+          }
+        ]
+      },
+      "RangeUcum": {
+        "required": [
+          "high",
+          "low",
+          "unit"
+        ],
+        "type": "object",
+        "properties": {
+          "low": {
+            "type": "number",
+            "format": "double"
+          },
+          "high": {
+            "type": "number",
+            "format": "double"
+          },
+          "unit": {
+            "type": "string"
+          }
+        }
+      },
+      "RangeWithCodedUnit": {
+        "required": [
+          "high",
+          "low",
+          "unit"
+        ],
+        "type": "object",
+        "properties": {
+          "low": {
+            "type": "number",
+            "format": "double"
+          },
+          "high": {
+            "type": "number",
+            "format": "double"
+          },
+          "unit": {
+            "$ref": "#/components/schemas/CodeWithName"
+          }
+        },
+        "nullable": true
+      },
+      "QueryResponseAssignedDevice": {
+        "type": "object",
+        "properties": {
+          "assigned_device": {
+            "$ref": "#/components/schemas/AssignedDevice"
+          }
+        }
+      },
+      "MedicationDispenseEvent": {
+        "required": [
+          "id",
+          "medication_administration_requests",
+          "medication_kind"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "medication_administration_requests": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MedicationAdministrationRequest"
+            }
+          },
+          "begin_time": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "end_time": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "ucum_quantity": {
+            "$ref": "#/components/schemas/QuantityUcum"
+          },
+          "gstandard_quantity": {
+            "$ref": "#/components/schemas/QuantityWithCodedUnit"
+          },
+          "medication_kind": {
+            "$ref": "#/components/schemas/MedicationKind"
+          },
+          "prescription_time": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "prescription_author": {
+            "$ref": "#/components/schemas/AssignedPerson"
+          }
+        }
+      },
+      "MedicationDispenseList": {
+        "required": [
+          "medication_dispense_events"
+        ],
+        "type": "object",
+        "properties": {
+          "assigned_device": {
+            "$ref": "#/components/schemas/AssignedDevice"
+          },
+          "patient": {
+            "$ref": "#/components/schemas/Patient"
+          },
+          "medication_dispense_events": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MedicationDispenseEvent"
+            }
+          }
+        },
+        "nullable": true
+      },
+      "QueryResponseMedicationDispenseList": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/QueryResponse"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "data": {
+                "$ref": "#/components/schemas/MedicationDispenseList"
+              }
+            }
+          }
+        ]
+      },
+      "ActingPerson": {
+        "required": [
+          "role_code",
+          "uzi_number"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "$ref": "#/components/schemas/PersonName"
+          },
+          "uzi_number": {
+            "type": "string"
+          },
+          "role_code": {
+            "$ref": "#/components/schemas/CodeWithName"
+          }
+        },
+        "description": "De verantwoordelijke zorgverlener namens wie de interactie uitgevoerd wordt"
+      },
+      "AcuityAssessment": {
+        "required": [
+          "type"
+        ],
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string"
+          }
+        },
+        "description": "Triage",
+        "nullable": true,
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "CompletedAcuityAssessment": "#/components/schemas/CompletedAcuityAssessment",
+            "SkippedAcuityAssessment": "#/components/schemas/SkippedAcuityAssessment"
+          }
+        }
+      },
+      "AcuityCriterium": {
+        "required": [
+          "answer",
+          "criterium"
+        ],
+        "type": "object",
+        "properties": {
+          "criterium": {
+            "$ref": "#/components/schemas/CodeWithName"
+          },
+          "answer": {
+            "$ref": "#/components/schemas/CodeWithName"
+          }
+        },
+        "description": "Triagecriterium"
+      },
+      "AcuityProblemObservation": {
+        "required": [
+          "code"
+        ],
+        "type": "object",
+        "properties": {
+          "code": {
+            "$ref": "#/components/schemas/CodeWithName"
+          }
+        },
+        "description": "Ingangsklacht"
+      },
+      "ClientMessageZorgidActorClinicalDocument": {
+        "required": [
+          "actor",
+          "content",
+          "context",
+          "transaction_reference"
+        ],
+        "type": "object",
+        "properties": {
+          "context": {
+            "$ref": "#/components/schemas/ContextZorgidActorClinicalDocument"
+          },
+          "actor": {
+            "$ref": "#/components/schemas/ZorgidActor"
+          },
+          "content": {
+            "$ref": "#/components/schemas/ClinicalDocument"
+          },
+          "transaction_reference": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "callback_url": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "title": ""
+      },
+      "ClinicalDocument": {
+        "type": "object",
+        "description": "Verwijzing (bijv. van HAP -> SEH)",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Id binnen de context van de organisatie (URA)"
+          },
+          "version": {
+            "type": "integer",
+            "description": "Versienummer. Kan gebruikt worden om een update van dezelfde verwijzing te sturen",
+            "format": "int32"
+          },
+          "time": {
+            "type": "string",
+            "description": "Tijd van de verwijzing",
+            "format": "date-time"
+          },
+          "patient": {
+            "$ref": "#/components/schemas/Patient"
+          },
+          "participant": {
+            "$ref": "#/components/schemas/AssignedPerson"
+          },
+          "referral": {
+            "$ref": "#/components/schemas/Referral"
+          },
+          "transportation": {
+            "$ref": "#/components/schemas/Transportation"
+          },
+          "acuity_assessment": {
+            "$ref": "#/components/schemas/AcuityAssessment"
+          },
+          "clinical_summary_hap": {
+            "$ref": "#/components/schemas/PrimaryCareProvision"
+          },
+          "clinical_summary_his": {
+            "$ref": "#/components/schemas/PrimaryCareProvision"
+          },
+          "urgency": {
+            "$ref": "#/components/schemas/ManualUrgency"
+          },
+          "plan_of_care": {
+            "$ref": "#/components/schemas/PlanofCare"
+          }
+        },
+        "required": [
+          "id",
+          "version",
+          "time",
+          "patient",
+          "referral",
+          "urgency"
+        ]
+      },
+      "CompletedAcuityAssessment": {
+        "required": [
+          "abcd_safe",
+          "complaints",
+          "id",
+          "method_code",
+          "system_urgency",
+          "triage_criteria"
+        ],
+        "type": "object",
+        "description": "Uitgevoerde triage",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/AcuityAssessment"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "Id van de triage"
+              },
+              "reporting_time": {
+                "type": "string",
+                "description": "Tijdstip van de melding van patient",
+                "format": "date-time",
+                "nullable": true
+              },
+              "begin_time": {
+                "type": "string",
+                "description": "Begintijd van de triage",
+                "format": "date-time",
+                "nullable": true
+              },
+              "end_time": {
+                "type": "string",
+                "description": "Afrondingstijd van de triage",
+                "format": "date-time",
+                "nullable": true
+              },
+              "abcd_safe": {
+                "type": "boolean",
+                "description": "ABCD-veilig"
+              },
+              "system_urgency": {
+                "$ref": "#/components/schemas/NtsUrgency"
+              },
+              "manual_urgency": {
+                "$ref": "#/components/schemas/ManualUrgency"
+              },
+              "method_code": {
+                "$ref": "#/components/schemas/TriageType"
+              },
+              "complaints": {
+                "type": "array",
+                "description": "Ingangsklachten",
+                "items": {
+                  "$ref": "#/components/schemas/AcuityProblemObservation"
+                }
+              },
+              "triage_criteria": {
+                "type": "array",
+                "description": "Triagecriteria",
+                "items": {
+                  "$ref": "#/components/schemas/AcuityCriterium"
+                }
+              },
+              "triage_comment": {
+                "type": "string",
+                "description": "TriageToelichting",
+                "nullable": true
+              }
+            }
+          }
+        ]
+      },
+      "TriageType": {
+        "type": "string",
+        "description": "Type triage",
+        "enum": [
+          "TELEFONISCH",
+          "FYSIEK"
+        ]
+      },
+      "ContextZorgidActorClinicalDocument": {
+        "required": [
+          "destination",
+          "identifier"
+        ],
+        "type": "object",
+        "properties": {
+          "identifier": {
+            "type": "string"
+          },
+          "destination": {
+            "type": "string"
+          },
+          "destination_lsp_application_id": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "ManualUrgency": {
+        "required": [
+          "code"
+        ],
+        "type": "object",
+        "properties": {
+          "code": {
+            "$ref": "#/components/schemas/NtsUrgency"
+          },
+          "manual_reason": {
+            "$ref": "#/components/schemas/CodeWithName"
+          },
+          "own_motivation": {
+            "type": "string",
+            "description": "Evt. eigen motivatie (als manual reason 'eigen motivatie' is)",
+            "nullable": true
+          }
+        },
+        "description": "Verwijsurgentie"
+      },
+      "NtsUrgency": {
+        "type": "string",
+        "description": "Urgentie",
+        "enum": [
+          "U0",
+          "U1",
+          "U2",
+          "U3",
+          "U4",
+          "U5"
+        ]
+      },
+      "Referral": {
+        "required": [
+          "reason",
+          "type"
+        ],
+        "type": "object",
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/ReferrerType"
+          },
+          "reason": {
+            "type": "string",
+            "description": "Verwijsvraag"
+          },
+          "icpc": {
+            "$ref": "#/components/schemas/CodeWithName"
+          }
+        },
+        "description": "Verwijsgegevens"
+      },
+      "ReferrerType": {
+        "type": "string",
+        "description": "Type verwijzing",
+        "enum": [
+          "TRIAGIST_HAP",
+          "HUISARTS_HAP",
+          "TRIAGIST_SEH",
+          "CENTRALIST_MKA",
+          "VASTE_HUISARTS"
+        ]
+      },
+      "ReferralDestination": {
+        "required": [
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Naam bestemming"
+          },
+          "ura": {
+            "type": "string",
+            "description": "URA",
+            "nullable": true
+          },
+          "address": {
+            "$ref": "#/components/schemas/Address"
+          },
+          "phone": {
+            "type": "string",
+            "description": "Telefoon",
+            "nullable": true
+          },
+          "expected_specialism": {
+            "$ref": "#/components/schemas/CodeWithName"
+          }
+        },
+        "description": "Verwijsbestemming",
+        "nullable": true
+      },
+      "SkippedAcuityAssessment": {
+        "required": [
+          "reason"
+        ],
+        "type": "object",
+        "description": "Overgeslagen triage",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/AcuityAssessment"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "reason": {
+                "type": "string",
+                "description": "Reden overslaan triage"
+              }
+            }
+          }
+        ]
+      },
+      "Transportation": {
+        "type": "object",
+        "properties": {
+          "source_address": {
+            "$ref": "#/components/schemas/Address"
+          },
+          "destination": {
+            "$ref": "#/components/schemas/ReferralDestination"
+          },
+          "extra_information": {
+            "type": "string",
+            "description": "Algemene bijzonderheden voor transport",
+            "nullable": true
+          },
+          "transportation_times": {
+            "$ref": "#/components/schemas/TransportationTimes"
+          }
+        },
+        "description": "Haal-/bestemmingsgegevens",
+        "nullable": true
+      },
+      "TransportationTimes": {
+        "type": "object",
+        "description": "Tijdsinterval wanneer transport plaatsvindt/plaatsvond",
+        "required": [
+          "departure_time"
+        ],
+        "properties": {
+          "departure_time": {
+            "type": "string",
+            "description": "Vertrektijd",
+            "format": "date-time"
+          },
+          "arrival_time": {
+            "type": "string",
+            "description": "Aankomsttijd",
+            "format": "date-time",
+            "nullable": true
+          }
+        }
+      },
+      "ZorgidActor": {
+        "required": [
+          "author_or_performer",
+          "overseer",
+          "zorgid_uuid"
+        ],
+        "type": "object",
+        "properties": {
+          "author_or_performer": {
+            "$ref": "#/components/schemas/ActingPerson"
+          },
+          "overseer": {
+            "$ref": "#/components/schemas/ActingPerson"
+          },
+          "zorgid_uuid": {
+            "type": "string",
+            "description": "UUID van de actieve Zorg-ID sessie",
+            "format": "uuid"
+          },
+          "mandaat_reference": {
+            "type": "string",
+            "format": "uuid",
+            "description": "Referentie naar een bestaande mandaattoken"
+          },
+          "inschrijftoken_reference": {
+            "type": "string",
+            "format": "uuid",
+            "description": "Referentie naar een bestaande inschrijftoken/registrationtoken"
+          }
+        }
+      },
+      "ActingCitizen": {
+        "required": [
+          "bsn"
+        ],
+        "type": "object",
+        "properties": {
+          "bsn": {
+            "type": "string"
+          },
+          "legal_representative": {
+            "type": "string",
+            "description": "RolCode van WettelijkeVertegenwoordiger",
+            "nullable": true,
+            "enum": [
+              "OUDER",
+              "VOOGD",
+              "CURATOR",
+              "MENTOR"
+            ]
+          }
+        },
+        "description": "De verantwoordelijke namens wie de interactie uitgevoerd wordt"
+      },
+      "BsnQuery": {
+        "required": [
+          "bsn"
+        ],
+        "type": "object",
+        "properties": {
+          "bsn": {
+            "type": "string"
+          }
+        }
+      },
+      "ClientMessageDigidActorBsnQuery": {
+        "required": [
+          "actor",
+          "content",
+          "context",
+          "transaction_reference"
+        ],
+        "type": "object",
+        "properties": {
+          "context": {
+            "$ref": "#/components/schemas/ContextDigidActorBsnQuery"
+          },
+          "actor": {
+            "$ref": "#/components/schemas/DigidActor"
+          },
+          "content": {
+            "$ref": "#/components/schemas/BsnQuery"
+          },
+          "transaction_reference": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "callback_url": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "ContextDigidActorBsnQuery": {
+        "required": [
+          "destination",
+          "identifier"
+        ],
+        "type": "object",
+        "properties": {
+          "identifier": {
+            "type": "string"
+          },
+          "destination": {
+            "type": "string"
+          },
+          "destination_lsp_application_id": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "DigidActor": {
+        "required": [
+          "author_or_performer",
+          "digid_token",
+          "overseer"
+        ],
+        "type": "object",
+        "properties": {
+          "author_or_performer": {
+            "$ref": "#/components/schemas/ActingCitizen"
+          },
+          "overseer": {
+            "$ref": "#/components/schemas/ActingCitizen"
+          },
+          "digid_token": {
+            "type": "string",
+            "description": "DigiD token"
+          }
+        }
+      },
+      "ClientMessageZorgidActorBsnQuery": {
+        "required": [
+          "actor",
+          "content",
+          "context",
+          "transaction_reference"
+        ],
+        "type": "object",
+        "properties": {
+          "context": {
+            "$ref": "#/components/schemas/ContextZorgidActorBsnQuery"
+          },
+          "actor": {
+            "$ref": "#/components/schemas/ZorgidActor"
+          },
+          "content": {
+            "$ref": "#/components/schemas/BsnQuery"
+          },
+          "transaction_reference": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "callback_url": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "ClientMessageSystemActorBsnQuery": {
+        "required": [
+          "actor",
+          "content",
+          "context",
+          "transaction_reference"
+        ],
+        "type": "object",
+        "properties": {
+          "context": {
+            "$ref": "#/components/schemas/ContextSystemActorBsnQuery"
+          },
+          "actor": {
+            "$ref": "#/components/schemas/SystemActorMandaat"
+          },
+          "content": {
+            "$ref": "#/components/schemas/BsnQuery"
+          },
+          "transaction_reference": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "callback_url": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "ContextZorgidActorBsnQuery": {
+        "required": [
+          "destination",
+          "identifier"
+        ],
+        "type": "object",
+        "properties": {
+          "identifier": {
+            "type": "string"
+          },
+          "destination": {
+            "type": "string"
+          },
+          "destination_lsp_application_id": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "ContextSystemActorBsnQuery": {
+        "required": [
+          "destination",
+          "identifier"
+        ],
+        "type": "object",
+        "properties": {
+          "identifier": {
+            "type": "string"
+          },
+          "destination": {
+            "type": "string"
+          },
+          "destination_lsp_application_id": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "ActingGbkMedewerker": {
+        "required": [
+          "pkio_pas_nummer"
+        ],
+        "type": "object",
+        "properties": {
+          "pkio_pas_nummer": {
+            "type": "string"
+          }
+        },
+        "description": "De GBK medewerker die de interactie uitvoert"
+      },
+      "ClientMessageGbkActorEventLogRequest": {
+        "required": [
+          "actor",
+          "content",
+          "context",
+          "transaction_reference"
+        ],
+        "type": "object",
+        "properties": {
+          "context": {
+            "$ref": "#/components/schemas/ContextGbkActorEventLogRequest"
+          },
+          "actor": {
+            "$ref": "#/components/schemas/GbkActor"
+          },
+          "content": {
+            "$ref": "#/components/schemas/EventLogRequest"
+          },
+          "transaction_reference": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "callback_url": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "ContextGbkActorEventLogRequest": {
+        "required": [
+          "destination",
+          "identifier"
+        ],
+        "type": "object",
+        "properties": {
+          "identifier": {
+            "type": "string"
+          },
+          "destination": {
+            "type": "string"
+          },
+          "destination_lsp_application_id": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "EventLogRequest": {
+        "required": [
+          "bsn"
+        ],
+        "type": "object",
+        "properties": {
+          "bsn": {
+            "type": "string"
+          },
+          "request_parameters": {
+            "$ref": "#/components/schemas/EventLogRequestParameters"
+          }
+        }
+      },
+      "EventLogRequestParameters": {
+        "type": "object",
+        "properties": {
+          "begin_time": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "end_time": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "act_data_types": {
+            "type": "array",
+            "description": "Code van gegevenssoort uit ActRegistryNL tabel",
+            "nullable": true,
+            "items": {
+              "type": "string",
+              "description": "Code van gegevenssoort uit ActRegistryNL tabel",
+              "nullable": true
+            }
+          },
+          "initiator_interaction_ids": {
+            "type": "array",
+            "description": "Interactie-id van het initiële bericht waarmee een bevraging gedaan is",
+            "nullable": true,
+            "items": {
+              "type": "string",
+              "description": "Interactie-id van het initiële bericht waarmee een bevraging gedaan is",
+              "nullable": true
+            }
+          }
+        },
+        "description": "Optionele parameters voor het aanvraagbericht naar het LSP",
+        "nullable": true
+      },
+      "GbkActor": {
+        "required": [
+          "author",
+          "overseer",
+          "preferred_ids",
+          "saml_token"
+        ],
+        "type": "object",
+        "properties": {
+          "author": {
+            "$ref": "#/components/schemas/ActingGbkMedewerker"
+          },
+          "overseer": {
+            "$ref": "#/components/schemas/ActingCitizen"
+          },
+          "saml_token": {
+            "type": "string",
+            "description": "SAML token"
+          },
+          "preferred_ids": {
+            "$ref": "#/components/schemas/PreferredIds"
+          }
+        }
+      },
+      "PreferredIds": {
+        "required": [
+          "message_id_extension",
+          "message_id_oid",
+          "query_id_extension",
+          "query_id_oid"
+        ],
+        "type": "object",
+        "properties": {
+          "message_id_oid": {
+            "type": "string"
+          },
+          "message_id_extension": {
+            "type": "string"
+          },
+          "query_id_oid": {
+            "type": "string"
+          },
+          "query_id_extension": {
+            "type": "string"
+          }
+        },
+        "description": "Id's to use in the LSP communication"
+      },
+      "ClientMessageDigidActorEventLogRequest": {
+        "required": [
+          "actor",
+          "content",
+          "context",
+          "transaction_reference"
+        ],
+        "type": "object",
+        "properties": {
+          "context": {
+            "$ref": "#/components/schemas/ContextDigidActorEventLogRequest"
+          },
+          "actor": {
+            "$ref": "#/components/schemas/DigidActor"
+          },
+          "content": {
+            "$ref": "#/components/schemas/EventLogRequest"
+          },
+          "transaction_reference": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "callback_url": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "ContextDigidActorEventLogRequest": {
+        "required": [
+          "destination",
+          "identifier"
+        ],
+        "type": "object",
+        "properties": {
+          "identifier": {
+            "type": "string"
+          },
+          "destination": {
+            "type": "string"
+          },
+          "destination_lsp_application_id": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "ActRegistryRequest": {
+        "required": [
+          "bsn"
+        ],
+        "type": "object",
+        "properties": {
+          "bsn": {
+            "type": "string"
+          },
+          "request_parameters": {
+            "$ref": "#/components/schemas/ActRegistryRequestParameters"
+          }
+        }
+      },
+      "ActRegistryRequestParameters": {
+        "type": "object",
+        "properties": {
+          "registration_types": {
+            "type": "array",
+            "description": "Code van gegevenssoort uit ActRegistryCodeNL tabel",
+            "nullable": true,
+            "items": {
+              "type": "string",
+              "description": "Code van gegevenssoort uit ActRegistryCodeNL tabel",
+              "nullable": true
+            }
+          }
+        },
+        "description": "Optionele parameters voor het aanvraagbericht naar het LSP",
+        "nullable": true
+      },
+      "ClientMessageZorgidActorActRegistryRequest": {
+        "required": [
+          "actor",
+          "content",
+          "context",
+          "transaction_reference"
+        ],
+        "type": "object",
+        "properties": {
+          "context": {
+            "$ref": "#/components/schemas/ContextZorgidActorActRegistryRequest"
+          },
+          "actor": {
+            "$ref": "#/components/schemas/ZorgidActor"
+          },
+          "content": {
+            "$ref": "#/components/schemas/ActRegistryRequest"
+          },
+          "transaction_reference": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "callback_url": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "ContextZorgidActorActRegistryRequest": {
+        "required": [
+          "destination",
+          "identifier"
+        ],
+        "type": "object",
+        "properties": {
+          "identifier": {
+            "type": "string"
+          },
+          "destination": {
+            "type": "string"
+          },
+          "destination_lsp_application_id": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "ClientMessageDigidActorActRegistryRequest": {
+        "required": [
+          "actor",
+          "content",
+          "context",
+          "transaction_reference"
+        ],
+        "type": "object",
+        "properties": {
+          "context": {
+            "$ref": "#/components/schemas/ContextDigidActorActRegistryRequest"
+          },
+          "actor": {
+            "$ref": "#/components/schemas/DigidActor"
+          },
+          "content": {
+            "$ref": "#/components/schemas/ActRegistryRequest"
+          },
+          "transaction_reference": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "callback_url": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "ContextDigidActorActRegistryRequest": {
+        "required": [
+          "destination",
+          "identifier"
+        ],
+        "type": "object",
+        "properties": {
+          "identifier": {
+            "type": "string"
+          },
+          "destination": {
+            "type": "string"
+          },
+          "destination_lsp_application_id": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "ClientMessageGbkActorActRegistryRequest": {
+        "required": [
+          "actor",
+          "content",
+          "context",
+          "transaction_reference"
+        ],
+        "type": "object",
+        "properties": {
+          "context": {
+            "$ref": "#/components/schemas/ContextGbkActorActRegistryRequest"
+          },
+          "actor": {
+            "$ref": "#/components/schemas/GbkActor"
+          },
+          "content": {
+            "$ref": "#/components/schemas/ActRegistryRequest"
+          },
+          "transaction_reference": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "callback_url": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "QueryResponseSubscriptionList": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/QueryResponse"
+          },
+          {
+            "$ref": "#/components/schemas/QueryResponseAssignedDevice"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "data": {
+                "$ref": "#/components/schemas/SubscriptionEventList"
+              }
+            }
+          }
+        ]
+      },
+      "SubscriptionEventList": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/SubscriptionEvent"
+        }
+      },
+      "SubscriptionEvent": {
+        "type": "object",
+        "properties": {
+          "subscriptionRoot": {
+            "type": "string"
+          },
+          "subscriptionExtension": {
+            "type": "string"
+          },
+          "eventCode": {
+            "$ref": "#/components/schemas/EventCode"
+          },
+          "validUntil": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "author": {
+            "$ref": "#/components/schemas/AssignedPerson"
+          }
+        },
+        "required": [
+          "subscriptionRoot",
+          "subscriptionExtension",
+          "eventCode",
+          "validUntil",
+          "author"
+        ]
+      },
+      "ClientMessageDigidActorRegisterSubscriptionRequest": {
+        "required": [
+          "actor",
+          "content",
+          "context",
+          "transaction_reference"
+        ],
+        "type": "object",
+        "properties": {
+          "context": {
+            "$ref": "#/components/schemas/ContextDigidActorRegisterSubscriptionRequest"
+          },
+          "actor": {
+            "$ref": "#/components/schemas/DigidActor"
+          },
+          "content": {
+            "$ref": "#/components/schemas/SubscriptionRegisterParameters"
+          },
+          "transaction_reference": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "callback_url": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "ContextDigidActorRegisterSubscriptionRequest": {
+        "required": [
+          "destination",
+          "identifier"
+        ],
+        "type": "object",
+        "properties": {
+          "identifier": {
+            "type": "string"
+          },
+          "destination": {
+            "type": "string"
+          },
+          "destination_lsp_application_id": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "SubscriptionRegisterParameters": {
+        "type": "object",
+        "properties": {
+          "applicationId": {
+            "type": "string"
+          },
+          "validUntil": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "eventCode": {
+            "$ref": "#/components/schemas/EventCode"
+          },
+          "objectCode": {
+            "type": "string",
+            "description": "Code van gegevenssoort uit ActRegistryCodeNL tabel"
+          },
+          "subject": {
+            "$ref": "#/components/schemas/SubscriptionSubject"
+          },
+          "subscriptionId": {
+            "type": "string"
+          }
+        }
+      },
+      "SubscriptionSubject": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string"
+          }
+        },
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "SubscriptionSubjectPatient": "#/components/schemas/SubscriptionSubjectPatient",
+            "SubscriptionSubjectZorginstelling": "#/components/schemas/SubscriptionSubjectZorginstelling",
+            "SubscriptionSubjectZorgverlener": "#/components/schemas/SubscriptionSubjectZorgverlener"
+          }
+        }
+      },
+      "SubscriptionSubjectPatient": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/SubscriptionSubject"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "bsn": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "bsn"
+            ]
+          }
+        ]
+      },
+      "SubscriptionSubjectZorginstelling": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/SubscriptionSubject"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "ura": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "ura"
+            ]
+          }
+        ]
+      },
+      "SubscriptionSubjectZorgverlener": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/SubscriptionSubject"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "uziNumber": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "uziNumber"
+            ]
+          }
+        ]
+      },
+      "ClientMessageDigidActorDeregisterSubscriptionRequest": {
+        "required": [
+          "actor",
+          "content",
+          "context",
+          "transaction_reference"
+        ],
+        "type": "object",
+        "properties": {
+          "context": {
+            "$ref": "#/components/schemas/ContextDigidActorDeregisterSubscriptionRequest"
+          },
+          "actor": {
+            "$ref": "#/components/schemas/DigidActor"
+          },
+          "content": {
+            "$ref": "#/components/schemas/SubscriptionDeregisterParameters"
+          },
+          "transaction_reference": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "callback_url": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "ContextDigidActorDeregisterSubscriptionRequest": {
+        "required": [
+          "destination",
+          "identifier"
+        ],
+        "type": "object",
+        "properties": {
+          "identifier": {
+            "type": "string"
+          },
+          "destination": {
+            "type": "string"
+          },
+          "destination_lsp_application_id": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "SubscriptionDeregisterParameters": {
+        "type": "object",
+        "description": "",
+        "properties": {
+          "subscriptionRoot": {
+            "type": "string"
+          },
+          "subscriptionExtension": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "subscriptionRoot",
+          "subscriptionExtension"
+        ],
+        "title": ""
+      },
+      "EventCode": {
+        "type": "string",
+        "enum": [
+          "WIJZIGING_VERWIJSINDEX",
+          "LOG_HER_AANMELDING",
+          "LOG_OPVRAGEN_INDEX",
+          "LOG_OPLEVEREN_INDEX",
+          "LOG_VAN_AFMELDING",
+          "LOG_OPVRAGEN_DATA",
+          "LOG_OPLEVEREN_DATA",
+          "LOG_DOORSTUREN_DATA",
+          "WIJZIGING_ABONNEMENTREGISTER"
+        ]
+      },
+      "ContextGbkActorActRegistryRequest": {
+        "required": [
+          "destination",
+          "identifier"
+        ],
+        "type": "object",
+        "properties": {
+          "identifier": {
+            "type": "string"
+          },
+          "destination": {
+            "type": "string"
+          },
+          "destination_lsp_application_id": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "ClientMessageSystemActorPing": {
+        "required": [
+          "content",
+          "context",
+          "transaction_reference"
+        ],
+        "type": "object",
+        "properties": {
+          "context": {
+            "$ref": "#/components/schemas/ContextSystemActorPing"
+          },
+          "content": {
+            "$ref": "#/components/schemas/Ping"
+          },
+          "transaction_reference": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "callback_url": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "ContextSystemActorPing": {
+        "required": [
+          "destination",
+          "identifier"
+        ],
+        "type": "object",
+        "properties": {
+          "identifier": {
+            "type": "string"
+          },
+          "destination": {
+            "type": "string"
+          },
+          "destination_lsp_application_id": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "Ping": {
+        "required": [
+          "application_id"
+        ],
+        "type": "object",
+        "properties": {
+          "application_id": {
+            "type": "string"
+          }
+        }
+      },
+      "RegistrationToken": {
+        "title": "RegistrationToken",
+        "type": "object",
+        "properties": {
+          "reference": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "bsn": {
+            "type": "string"
+          },
+          "not_before": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "not_on_or_after": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "required": [
+          "reference",
+          "bsn",
+          "not_before",
+          "not_on_or_after"
+        ],
+        "description": ""
+      },
+      "CreateRegistrationToken": {
+        "title": "CreateRegistrationToken",
+        "type": "object",
+        "description": "",
+        "properties": {
+          "bsn": {
+            "type": "string"
+          },
+          "scan_token": {
+            "type": "string",
+            "description": "Base64 encoded scantoken"
+          },
+          "not_before": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "not_on_or_after": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "required": [
+          "bsn",
+          "not_before",
+          "not_on_or_after"
+        ]
+      },
+      "DeleteRegistrationToken": {
+        "title": "DeleteRegistrationToken",
+        "type": "object",
+        "properties": {
+          "reference": {
+            "type": "string"
+          },
+          "bsn": {
+            "type": "string"
+          },
+          "identifier": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "reference",
+          "bsn",
+          "identifier"
+        ]
+      },
+      "MandaatToken": {
+        "title": "MandaatToken",
+        "type": "object",
+        "properties": {
+          "reference": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "not_before": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "not_on_or_after": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "issuer_uzi_number": {
+            "type": "string"
+          },
+          "issuer_role_code": {
+            "type": "string"
+          },
+          "token_uri": {
+            "type": "string",
+            "description": "URI waar de autorisatieregel/context gevonden kan worden waarbinnen het mandaat gegeven wordt. Zie ook Aorta Auth Implementatiehandleiding Mandaattoken"
+          }
+        },
+        "required": [
+          "reference",
+          "not_before",
+          "not_on_or_after",
+          "issuer_uzi_number",
+          "issuer_role_code",
+          "token_uri"
+        ],
+        "description": ""
+      },
+      "DeleteMandaatToken": {
+        "title": "DeleteMandaatToken",
+        "type": "object",
+        "properties": {
+          "identifier": {
+            "type": "string"
+          },
+          "reference": {
+            "type": "string",
+            "format": "uuid"
+          }
+        },
+        "required": [
+          "identifier",
+          "reference"
+        ]
+      },
+      "ClientMessageZorgidActorMandaatToken": {
+        "required": [
+          "actor",
+          "context",
+          "content",
+          "transaction_reference"
+        ],
+        "type": "object",
+        "properties": {
+          "actor": {
+            "$ref": "#/components/schemas/ZorgidActor"
+          },
+          "context": {
+            "$ref": "#/components/schemas/ContextZorgidActorBsnQuery"
+          },
+          "content": {
+            "$ref": "#/components/schemas/CreateMandaatToken"
+          },
+          "transaction_reference": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "callback_url": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "ClientMessageZorgidActorRegistrationToken": {
+        "type": "object",
+        "properties": {
+          "actor": {
+            "$ref": "#/components/schemas/ZorgidActor"
+          },
+          "context": {
+            "$ref": "#/components/schemas/ContextZorgidActorBsnQuery"
+          },
+          "content": {
+            "$ref": "#/components/schemas/CreateRegistrationToken"
+          },
+          "transaction_reference": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "callback_url": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "required": [
+          "actor",
+          "context",
+          "content",
+          "transaction_reference"
+        ]
+      },
+      "CreateMandaatToken": {
+        "title": "CreateMandaatToken",
+        "type": "object",
+        "properties": {
+          "not_before": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "not_on_or_after": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "token_uri": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "not_before",
+          "not_on_or_after",
+          "token_uri"
+        ]
+      },
+      "SystemActorMandaat": {
+        "type": "object",
+        "properties": {
+          "mandaat_reference": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "inschrijftoken_reference": {
+            "type": "string",
+            "format": "uuid"
+          }
+        },
+        "required": [
+          "mandaat_reference",
+          "inschrijftoken_reference"
+        ]
+      },
+      "Mitz.RegisterConsentRequest": {
+        "title": "Mitz.RegisterConsentRequest",
+        "type": "object",
+        "description": "",
+        "properties": {
+          "overseer": {
+            "$ref": "#/components/schemas/ActingPerson"
+          },
+          "content": {
+            "$ref": "#/components/schemas/Mitz.RegisterConsentRequestContent"
+          },
+          "transaction_reference": {
+            "type": "string",
+            "format": "uuid",
+            "description": "Uniek ID van de bevraging, deze wordt in de callback gebruikt als referentie naar het aanvraagbericht"
+          },
+          "mandaat_reference": {
+            "type": "string",
+            "format": "uuid",
+            "description": "Referentie naar een bestaande mandaattoken"
+          },
+          "inschrijftoken_reference": {
+            "type": "string",
+            "format": "uuid",
+            "description": "Referentie naar een bestaande inschrijftoken/registrationtoken"
+          },
+          "callback_url": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "required": [
+          "overseer",
+          "content",
+          "transaction_reference",
+          "mandaat_reference",
+          "inschrijftoken_reference"
+        ]
+      },
+      "Mitz.Patient": {
+        "title": "Mitz.Patient",
+        "type": "object",
+        "description": "",
+        "properties": {
+          "bsn": {
+            "type": "string"
+          },
+          "birth_date": {
+            "type": "string",
+            "format": "date"
+          },
+          "phone_number": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string",
+            "format": "email"
+          }
+        },
+        "required": [
+          "bsn",
+          "birth_date"
+        ]
+      },
+      "Mitz.RegisterConsentRequestContent": {
+        "title": "Mitz.RegisterConsentRequestContent",
+        "type": "object",
+        "description": "",
+        "properties": {
+          "situation_code": {
+            "type": "string",
+            "description": "Mitz situatie-code"
+          },
+          "consent": {
+            "type": "string",
+            "description": "Toestemming gegeven (permit) of juist expliciet niet gegeven (deny)",
+            "enum": [
+              "permit",
+              "deny"
+            ]
+          },
+          "patient": {
+            "$ref": "#/components/schemas/Mitz.Patient"
+          }
+        },
+        "required": [
+          "situation_code",
+          "consent",
+          "patient"
+        ]
+      },
+      "PlanofCare": {
+        "title": "PlanofCare",
+        "type": "object",
+        "properties": {
+          "planned_activity": {
+            "$ref": "#/components/schemas/PlannedActivity"
+          },
+          "advices": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Advice"
+            }
+          }
+        },
+        "required": [
+          "planned_activity"
+        ]
+      },
+      "PlannedActivity": {
+        "title": "PlannedActivity",
+        "type": "object",
+        "properties": {
+          "system_planned_activity": {
+            "$ref": "#/components/schemas/SystemPlannedActivity"
+          },
+          "manual_planned_activity": {
+            "$ref": "#/components/schemas/ManualPlannedActivity"
+          }
+        },
+        "required": [
+          "manual_planned_activity"
+        ]
+      },
+      "ManualPlannedActivity": {
+        "title": "ManualPlannedActivity",
+        "type": "object",
+        "description": "code: code uit 'NTS Vervolgacties' lijst.\nmanual_reason: code uit 'NTS Redenen afwijken vervolgactie' lijst.",
+        "properties": {
+          "code": {
+            "$ref": "#/components/schemas/CodeWithName"
+          },
+          "text": {
+            "type": "string",
+            "description": "Tekstuele omschrijving van de gecodeerde gegevens in het 'code' element"
+          },
+          "manual_reason": {
+            "$ref": "#/components/schemas/CodeWithName"
+          },
+          "own_motivation": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "required": [
+          "code",
+          "text"
+        ]
+      },
+      "Advice": {
+        "title": "Advice",
+        "type": "object",
+        "description": "code: code uit 'NTS Adviezen' lijst.",
+        "properties": {
+          "code": {
+            "$ref": "#/components/schemas/CodeWithName"
+          },
+          "text": {
+            "type": "string",
+            "description": "Tekstuele omschrijving van de gecodeerde gegevens in het 'code' element"
+          },
+          "advice_comment": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "required": [
+          "code",
+          "text"
+        ]
+      },
+      "SystemPlannedActivity": {
+        "title": "SystemPlannedActivity",
+        "type": "object",
+        "properties": {
+          "code": {
+            "$ref": "#/components/schemas/CodeWithName"
+          },
+          "text": {
+            "type": "string",
+            "description": "Tekstuele omschrijving van de gecodeerde gegevens in het 'code' element"
+          }
+        },
+        "required": [
+          "code",
+          "text"
+        ],
+        "description": "code: code uit codelijst: NTS Vervolgacties"
+      },
+      "ClientMessageZorgidActorRegisterConsent": {
+        "type": "object",
+        "title": "",
+        "properties": {
+          "context": {
+            "$ref": "#/components/schemas/ContextZorgidActorRegisterConsentRequest"
+          },
+          "actor": {
+            "$ref": "#/components/schemas/ZorgidActor"
+          },
+          "content": {
+            "$ref": "#/components/schemas/RegisterConsentRequest"
+          },
+          "transaction_reference": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "callback_url": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "required": [
+          "context",
+          "actor",
+          "content",
+          "transaction_reference"
+        ]
+      },
+      "RegisterConsentRequest": {
+        "title": "RegisterConsentRequest",
+        "type": "object",
+        "properties": {
+          "situation_code": {
+            "type": "string",
+            "description": "Mitz situatie-code"
+          },
+          "consent": {
+            "type": "string",
+            "description": "Toestemming gegeven (permit) of juist expliciet niet gegeven (deny)",
+            "enum": [
+              "permit",
+              "deny"
+            ]
+          },
+          "patient": {
+            "$ref": "#/components/schemas/Patient"
+          }
+        },
+        "required": [
+          "situation_code",
+          "consent",
+          "patient"
+        ]
+      },
+      "ContextZorgidActorRegisterConsentRequest": {
+        "required": [
+          "destination",
+          "identifier"
+        ],
+        "type": "object",
+        "properties": {
+          "identifier": {
+            "type": "string"
+          },
+          "destination": {
+            "type": "string"
+          },
+          "destination_lsp_application_id": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "oauth": {
+        "type": "oauth2",
+        "flows": {
+          "clientCredentials": {
+            "tokenUrl": "https://test.login.topicuszorg.nl/auth/realms/Apps/protocol/openid-connect/token",
+            "scopes": {
+              "lspws_app": "Scope benodigd voor LSPWS"
+            }
+          }
+        },
+        "description": ""
+      }
+    }
+  }
+}
